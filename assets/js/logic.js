@@ -1,5 +1,6 @@
 import { quizQuestions } from "./questions.js";
 
+// elements
 var buttonEl = document.querySelector("#start");
 var timerEl = document.querySelector("#time");
 var questionsEl = document.querySelector("#questions");
@@ -12,11 +13,13 @@ var initialsEl = document.querySelector("#initials");
 var finalScoreEl = document.querySelector("#final-score");
 var feedbackEl = document.querySelector("#feedback");
 
+// global variables
 var questionObject = quizQuestions;
 var currentQuestion = 0;
 var correctAnswer = 0;
 var timeLeft = 60;
 
+// audio variables
 var correctAudio = new Audio("./assets/sfx/correct.wav");
 var incorrectAudio = new Audio("./assets/sfx/incorrect.wav");
 

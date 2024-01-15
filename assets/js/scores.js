@@ -1,3 +1,4 @@
+// element variables
 var clearEl = document.querySelector("#clear");
 var highScoresEl = document.querySelector("#highscores");
 

@@ -1,3 +1,4 @@
+// quiz object with questions, options, and answers
 export const quizQuestions = [
   {
     question: "What is the purpose of the console.log() function in JavaScript?",
