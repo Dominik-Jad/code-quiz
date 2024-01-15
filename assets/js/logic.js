@@ -15,7 +15,7 @@ var feedbackEl = document.querySelector("#feedback");
 var questionObject = quizQuestions;
 var currentQuestion = 0;
 var correctAnswer = 0;
-var timeLeft = 100;
+var timeLeft = 20;
 
 //display questions
 function displayQuestions() {
@@ -112,9 +112,13 @@ function saveScore(){
         alert("Please enter your initials.");
         return;
     }
+    // high scores is equal to high scores in local storage or empty array if nothing in local storage
     var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+    // add score to high scores array
     highScores.push(score);
+    // add the new array of scores to local storage
     localStorage.setItem("highScores", JSON.stringify(highScores));
+    // redirect to high scores page
     window.location.href = "highscores.html";
 }
 
