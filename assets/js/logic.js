@@ -17,6 +17,9 @@ var currentQuestion = 0;
 var correctAnswer = 0;
 var timeLeft = 60;
 
+var correctAudio = new Audio("./assets/sfx/correct.wav");
+var incorrectAudio = new Audio("./assets/sfx/incorrect.wav");
+
 //display questions
 function displayQuestions() {
     // clear out any old question choices
@@ -43,7 +46,8 @@ function answers(event) {
     if (event.target.getAttribute("data-answer") == questionObject[currentQuestion].answer) {
         // increase score if answer is correct
         correctAnswer++;
-        // display correct answer message
+        // display correct answer message and play correct audio
+        correctAudio.play(); 
         feedbackEl.removeAttribute("class", "hide");
         feedbackEl.setAttribute("class", "feedback");
         feedbackEl.textContent = "Correct!";
@@ -54,7 +58,8 @@ function answers(event) {
     } else {
         // penalize time
         timeLeft -= 10;
-        // display wrong answer message
+        // display wrong answer message and play incorrect audio
+        incorrectAudio.play();
         feedbackEl.removeAttribute("class", "hide");
         feedbackEl.setAttribute("class", "feedback");
         feedbackEl.textContent = "Wrong!";

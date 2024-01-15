@@ -10,7 +10,9 @@ function displayScores() {
         highScoresEl.textContent = "No high scores to display.";
         return;
     }
+    // loop through high scores and display them 
     for (var i = 0; i < highScores.length; i++) {
+        // create list item for each high score
         var score = document.createElement("li");
         score.textContent = `${highScores[i].initials} - ${highScores[i].score}`;
         highScoresEl.appendChild(score);
