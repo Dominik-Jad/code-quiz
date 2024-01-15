@@ -15,7 +15,7 @@ var feedbackEl = document.querySelector("#feedback");
 var questionObject = quizQuestions;
 var currentQuestion = 0;
 var correctAnswer = 0;
-var timeLeft = 20;
+var timeLeft = 60;
 
 //display questions
 function displayQuestions() {

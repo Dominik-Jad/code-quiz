@@ -1,6 +1,5 @@
 var clearEl = document.querySelector("#clear");
 var highScoresEl = document.querySelector("#highscores");
-var clearEl = document.querySelector("#clear");
 
 // function to display high scores
 function displayScores() {
@@ -22,3 +21,9 @@ function displayScores() {
 displayScores();
 
 // function to clear high scores
+clearEl.addEventListener("click", function () {
+    // clear high scores from local storage
+    localStorage.removeItem("highScores");
+    // reload page
+    window.location.reload();
+});
