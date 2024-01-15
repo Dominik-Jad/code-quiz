@@ -112,12 +112,13 @@ function endGame(){
 
 function saveScore(){
     var score = {
-        initials: initialsEl.value.trim(),
+        // get initials and convert to uppercase
+        initials: initialsEl.value.trim().toUpperCase(),
         score: correctAnswer
     };
-    // check if initials are empty
-    if (score.initials === "") {
-        alert("Please enter your initials.");
+    // check if initials are empty or more than 2 characters
+    if (score.initials === "" || score.initials.length > 2) {
+        alert("Please enter your initials. (Max 2 characters)");
         return;
     }
     // high scores is equal to high scores in local storage or empty array if nothing in local storage
