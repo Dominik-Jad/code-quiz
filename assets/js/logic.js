@@ -48,7 +48,7 @@ function answers(event) {
         feedbackEl.setAttribute("class", "feedback");
         feedbackEl.textContent = "Correct!";
         // after 2 seconds, hide the message
-        setTimeout(() => {
+        setInterval(() => {
             feedbackEl.setAttribute("class", "hide");
         }, 2000);
     } else {
@@ -59,7 +59,7 @@ function answers(event) {
         feedbackEl.setAttribute("class", "feedback");
         feedbackEl.textContent = "Wrong!";
         // after 2 seconds, hide the message
-        setTimeout(() => {
+        setInterval(() => {
             feedbackEl.setAttribute("class", "hide");
         }, 2000);
     }
@@ -101,6 +101,25 @@ function endGame(){
     // show final score
     finalScoreEl.textContent = `${correctAnswer} out of ${questionObject.length}`;
 }
+
+function saveScore(){
+    var score = {
+        initials: initialsEl.value.trim(),
+        score: correctAnswer
+    };
+    // check if initials are empty
+    if (score.initials === "") {
+        alert("Please enter your initials.");
+        return;
+    }
+    var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+    highScores.push(score);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    window.location.href = "highscores.html";
+}
+
+// event listener for submit button
+submitBtn.addEventListener("click", saveScore);
 
 // event listener for answer choices
 choicesEl.addEventListener("click", answers);
