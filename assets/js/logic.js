@@ -29,11 +29,48 @@ function displayQuestions() {
             choice.setAttribute("data-answer", i);
             choice.innerHTML = `${i + 1}. ${questionObject[currentQuestion].options[i]}`;
             choicesEl.appendChild(choice);
-            console.log(choice);
     }
     // display question title
     questionTitleEl.textContent = questionObject[currentQuestion].question;
 }
+
+function answers(event) {
+    // check if answer is correct
+    if (event.target.getAttribute("data-answer") == questionObject[currentQuestion].answer) {
+        // increase score if answer is correct
+        correctAnswer++;
+        // display correct answer message
+        feedbackEl.removeAttribute("class", "hide");
+        feedbackEl.setAttribute("class", "feedback");
+        feedbackEl.textContent = "Correct!";
+        // after 1 second, hide the message
+        setTimeout(() => {
+            feedbackEl.setAttribute("class", "hide");
+        }, 1000);
+    } else {
+        // penalize time
+        timeLeft -= 10;
+        // display wrong answer message
+        feedbackEl.removeAttribute("class", "hide");
+        feedbackEl.setAttribute("class", "feedback");
+        feedbackEl.textContent = "Wrong!";
+        // after 1 second, hide the message
+        setTimeout(() => {
+            feedbackEl.setAttribute("class", "hide");
+        }, 1000);
+    }
+    // move to next question
+    currentQuestion++;
+    // check if we've run out of questions
+    if (currentQuestion === questionObject.length) {
+        console.log("quiz is over");
+    } else {
+        displayQuestions();
+    }
+}
+
+// event listener for answer choices
+choicesEl.addEventListener("click", answers);
 
 // event listener for start button to start timer and display questions
 buttonEl.addEventListener("click", function () {
@@ -45,3 +82,5 @@ buttonEl.addEventListener("click", function () {
     timerEl.textContent = timeLeft;
     displayQuestions();
 });
+
+
