@@ -18,7 +18,6 @@ var correctAnswer = 0;
 var timeLeft = 100;
 
 //display questions
-
 function displayQuestions() {
     // clear out any old question choices
     choicesEl.innerHTML = "";
@@ -34,8 +33,13 @@ function displayQuestions() {
     questionTitleEl.textContent = questionObject[currentQuestion].question;
 }
 
+// function to check if answer is correct
 function answers(event) {
-    // check if answer is correct
+    // check if button clicked, if not exit function
+    if (!event.target.matches("button")){
+        return;
+    }
+        // check if answer is correct
     if (event.target.getAttribute("data-answer") == questionObject[currentQuestion].answer) {
         // increase score if answer is correct
         correctAnswer++;
@@ -43,10 +47,10 @@ function answers(event) {
         feedbackEl.removeAttribute("class", "hide");
         feedbackEl.setAttribute("class", "feedback");
         feedbackEl.textContent = "Correct!";
-        // after 1 second, hide the message
+        // after 2 seconds, hide the message
         setTimeout(() => {
             feedbackEl.setAttribute("class", "hide");
-        }, 1000);
+        }, 2000);
     } else {
         // penalize time
         timeLeft -= 10;
@@ -54,10 +58,10 @@ function answers(event) {
         feedbackEl.removeAttribute("class", "hide");
         feedbackEl.setAttribute("class", "feedback");
         feedbackEl.textContent = "Wrong!";
-        // after 1 second, hide the message
+        // after 2 seconds, hide the message
         setTimeout(() => {
             feedbackEl.setAttribute("class", "hide");
-        }, 1000);
+        }, 2000);
     }
     // move to next question
     currentQuestion++;
@@ -69,6 +73,22 @@ function answers(event) {
     }
 }
 
+// timer function
+function startTimer(){
+    // start timer countdown
+    var timeInterval = setInterval(function() {
+        // decrement time
+        timeLeft--;
+        timerEl.textContent = timeLeft;
+        // check if user ran out of time
+        if (timeLeft <= 0) {
+            // stop timer
+            clearInterval(timeInterval);
+            // set timer to 0 
+            timerEl.textContent = 0;
+        }
+    }, 1000);
+}
 // event listener for answer choices
 choicesEl.addEventListener("click", answers);
 
@@ -80,6 +100,7 @@ buttonEl.addEventListener("click", function () {
     questionsEl.setAttribute("class", "show");
     // start timer and display questions
     timerEl.textContent = timeLeft;
+    startTimer();
     displayQuestions();
 });
 
