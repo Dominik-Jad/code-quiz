@@ -67,7 +67,7 @@ function answers(event) {
     currentQuestion++;
     // check if we've run out of questions
     if (currentQuestion === questionObject.length) {
-        console.log("quiz is over");
+        endGame();
     } else {
         displayQuestions();
     }
@@ -86,9 +86,22 @@ function startTimer(){
             clearInterval(timeInterval);
             // set timer to 0 
             timerEl.textContent = 0;
+            // end game
+            endGame();
         }
     }, 1000);
 }
+
+// function to end quiz
+function endGame(){
+    // hide questions section
+    questionsEl.setAttribute("class", "hide");
+    // show end screen
+    endScreenEl.setAttribute("class", "show");
+    // show final score
+    finalScoreEl.textContent = `${correctAnswer} out of ${questionObject.length}`;
+}
+
 // event listener for answer choices
 choicesEl.addEventListener("click", answers);
 
